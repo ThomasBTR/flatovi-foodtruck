@@ -1,4 +1,4 @@
-package com.training.flatovifoodtruck.models;
+package com.training.flatovifoodtruck.Entities;
 
 public class Adresse {
 	private Integer Id_Adresse;
@@ -10,6 +10,7 @@ public class Adresse {
 	private String TypeAdresse;
 	private boolean Actif;
 	private Utilisateur Utilisateur;
+
 	public Integer getId_Adresse() {
 		return Id_Adresse;
 	}

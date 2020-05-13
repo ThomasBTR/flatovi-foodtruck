@@ -1,8 +1,7 @@
-package com.training.flatovifoodtruck.models;
+package com.training.flatovifoodtruck.Entities;
 
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Collection;
 import java.util.List;
 
 import javax.persistence.*;
@@ -26,7 +25,7 @@ public class Utilisateur  {
 	private Integer id;
 	private String nom;
 	private String prenom;
-	private String login; 
+	private String login;
 	private String password;
 	private String email;
 	@Temporal(TemporalType.DATE)

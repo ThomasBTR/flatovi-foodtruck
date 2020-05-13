@@ -1,4 +1,4 @@
-package com.training.flatovifoodtruck.models.DTO;
+package com.training.flatovifoodtruck.Entities.DTO;
 
 //import com.example.demo.Helper.HelperMethod;
 

@@ -1,4 +1,4 @@
-package com.training.flatovifoodtruck.models;
+package com.training.flatovifoodtruck.Entities;
 
 import javax.persistence.*;
 

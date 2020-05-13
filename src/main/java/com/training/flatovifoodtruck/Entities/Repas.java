@@ -1,4 +1,4 @@
-package com.training.flatovifoodtruck.models;
+package com.training.flatovifoodtruck.Entities;
 
 import java.util.List;
 
@@ -6,41 +6,32 @@ import javax.persistence.*;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
-/**
- * @author godwinavodagbe
- *
- */
 @Entity
 @NamedQueries({
-	@NamedQuery(name = "Famille_Repas.findAll", query = "from Famille_Repas"),
-	@NamedQuery(name = "Famille_Repas.findById", query = "from Famille_Repas where id = :myID")
-}) 
-public class Famille_Repas {
+	@NamedQuery(name = "Repas.findAll", query = "from Repas"),
+	@NamedQuery(name = "Repas.findById", query = "from Repas where id = :myID")
+})
+public class Repas {
 	
 	/*********************************************************************
 	 * Properties
 	 *********************************************************************/
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "id_famille_repas")
+	@Column(nullable = false, name = "id_repas")
 	private Integer id;
+	//@Basic(fetch = FetchType.LAZY, optional = true)
 	@Column(name = "libelle")
-	private String libelle; 
-	private boolean isenabled;
+	private String libelle;
+	@Temporal(TemporalType.TIME)
+	private java.util.Date heure_limite;
+	private boolean isenabled; 
 	@JsonIgnore
-	@ManyToMany(cascade = CascadeType.ALL)
-	@JoinTable(
-			joinColumns=@JoinColumn(name="id_famille_repas"),
-			inverseJoinColumns=@JoinColumn(name="id_repas")
-	)
-	private List<Repas> repas;
-	@JsonIgnore
-	@OneToMany(mappedBy="famille_repas",cascade = {CascadeType.REMOVE})
-	private List<Produit> produitList;
-	private String imageURL;
+	@ManyToMany(mappedBy = "repas", cascade = CascadeType.PERSIST)
+	private List<Famille_Repas> famille_repas;
+	private String imageURL; 
 	
 	
-
 	/*********************************************************************
 	 * Gettes / Setters
 	 *********************************************************************/
@@ -60,6 +51,14 @@ public class Famille_Repas {
 		this.libelle = libelle;
 	}
 
+	public java.util.Date getHeure_limite() {
+		return heure_limite;
+	}
+
+	public void setHeure_limite(java.util.Date heure_limite) {
+		this.heure_limite = heure_limite;
+	}
+
 	public boolean isIsenabled() {
 		return isenabled;
 	}
@@ -68,22 +67,14 @@ public class Famille_Repas {
 		this.isenabled = isenabled;
 	}
 
-	public List<Repas> getRepas() {
-		return repas;
+	public List<Famille_Repas> getFamille_repas() {
+		return famille_repas;
 	}
 
-	public void setRepas(List<Repas> repas) {
-		this.repas = repas;
+	public void setFamille_repas(List<Famille_Repas> famille_repas) {
+		this.famille_repas = famille_repas;
 	}
 	
-
-	public List<Produit> getProduitList() {
-		return produitList;
-	}
-
-	public void setProduitList(List<Produit> produitList) {
-		this.produitList = produitList;
-	}
 	
 	public String getImageURL() {
 		return imageURL;
@@ -92,17 +83,18 @@ public class Famille_Repas {
 	public void setImageURL(String imageURL) {
 		this.imageURL = imageURL;
 	}
-	
+
 	/*********************************************************************
 	 * Constructors
 	 *********************************************************************/
-	public Famille_Repas() {
+	
+	public Repas() {
 		
 	}
 	
-	public Famille_Repas (String libelle, boolean isenabled) {
+	public Repas(String libelle, java.util.Date heure_limite, boolean isenabled) {
 		this.libelle 	= libelle;
-		this.isenabled 	= isenabled;
+		this.heure_limite 	= heure_limite;
+		this.isenabled		= isenabled;
 	}
-	
 }

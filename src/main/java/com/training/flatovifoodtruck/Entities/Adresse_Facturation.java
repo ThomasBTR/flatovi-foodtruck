@@ -1,32 +1,31 @@
-package com.training.flatovifoodtruck.models;
+package com.training.flatovifoodtruck.Entities;
 
 import javax.persistence.*;
 
+
 @Entity
 @NamedQueries({
-	@NamedQuery(name="Societe.findAll", query = "from Societe"),
-	@NamedQuery(name="Societe.findById", query = "from Societe where id = :myID")
+	@NamedQuery(name="Adresse_Facturation.findAll", query = "from Adresse_Facturation"),
+	@NamedQuery(name="Adresse_Facturation.findById", query = "from Adresse_Facturation where id = :myID")
 })
-public class Societe {
+public class Adresse_Facturation {
 	/*********************************************************************
 	 * Properties
 	 *********************************************************************/
 	@Id
 	@GeneratedValue(strategy= GenerationType.IDENTITY)
-	@Column(nullable = false, name = "id_societe")
+	@Column(nullable = false, name = "id_adresse_facturation")
 	private Integer id;
-	private String nom_societe;
 	private Integer num_rue;
 	private String rue;
-	
-
 	private String code_postal;
 	private String ville;
 	private String pays;
-	private String num_siret;
-	private String num_siren;
+	private Boolean isenable;
+	@ManyToOne
+	@JoinColumn(name="id_utilisateur")
+	private Utilisateur user;
 
-	
 	/*********************************************************************
 	 * Gettes / Setters
 	 *********************************************************************/
@@ -40,33 +39,21 @@ public class Societe {
 		this.id = id;
 	}
 
-	public String getNom_societe() {
-		return nom_societe;
-	}
-
-	public void setNom_societe(String nom_societe) {
-		this.nom_societe = nom_societe;
-	}
-
 	public Integer getNum_rue() {
 		return num_rue;
 	}
-
 
 	public void setNum_rue(Integer num_rue) {
 		this.num_rue = num_rue;
 	}
 
-
 	public String getRue() {
 		return rue;
 	}
 
-
 	public void setRue(String rue) {
 		this.rue = rue;
 	}
-
 
 	public String getCode_postal() {
 		return code_postal;
@@ -98,41 +85,39 @@ public class Societe {
 	}
 
 
-	public String getNum_siret() {
-		return num_siret;
+	public Boolean getIsenable() {
+		return isenable;
 	}
 
 
-	public void setNum_siret(String num_siret) {
-		this.num_siret = num_siret;
+	public void setIsenable(Boolean isenable) {
+		this.isenable = isenable;
 	}
 
 
-	public String getNum_siren() {
-		return num_siren;
+	public Utilisateur getUser() {
+		return user;
 	}
 
 
-	public void setNum_siren(String num_siren) {
-		this.num_siren = num_siren;
+	public void setUser(Utilisateur user) {
+		this.user = user;
 	}
+
 
 	/*********************************************************************
 	 * Constructors
 	 *********************************************************************/
-	
-	public Societe() {
+	public Adresse_Facturation() {
 		
 	}
 
-	public Societe( String nom_societe,Integer num_rue,String rue, String code_postal, String ville, String pays, String num_siret, String num_siren) {
-		this.nom_societe= nom_societe;
+	public Adresse_Facturation( Integer num_rue,String rue, String code_postal, String ville, String pays, Boolean isenable) {
 		this.num_rue 	= num_rue;
 		this.rue 		= rue;
 		this.code_postal= code_postal;
 		this.ville 		= ville;
 		this.pays		= pays;
-		this.num_siret	= num_siret;
-		this.num_siren	= num_siren;
+		this.isenable	= isenable;
 	}
 }
