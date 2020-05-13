@@ -11,6 +11,4 @@ import java.util.List;
 public interface UtilisateurRepository extends JpaRepository<Utilisateur, Integer> {
     List<Utilisateur> findByNomContaining(String nom);
     List<Utilisateur> findByNomAndPrenom(String nom, String prenom);
-
-
 }
