@@ -26,14 +26,11 @@
                 <li>
                     <nav class="navbar navbar-light bg-light">
                         <a class="navbar-brand" href="#">
-                            <img src="../static/images/logo.png" width="45" height="45" alt="" loading="lazy">
+                            <img th:src=@{"../static/images/logo.png"} width="45" height="45" alt="" loading="lazy">
                         </a>
                     </nav>
                 </li>
                 <li class="nav-item active">
-
-
-
 
                     <!--                <a class="nav-link" th:href="@{/}">Home-->
                     <!--                <span class="sr-only">(current)</span>-->
@@ -47,7 +44,7 @@
                         </a>
                         <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
                             <button class="dropdown-item" type="button">Utilisateur</button>
-                            <button class="dropdown-item" type="button">Produis</button>
+                            <button class="dropdown-item" type="button">Produits</button>
                         </div>
                     </div>
                 </li>
@@ -56,7 +53,7 @@
             </ul>
 
             <a class="navbar-brand" href="#">
-                <img src="../static/images/shopping_cart-24px.svg" width="45" height="45" alt="" loading="lazy">
+                <img src= "../static/images/shopping_cart-24px.svg"  th:src=@{"/images/shopping_cart-24px.svg"} width="45" height="45" alt="" loading="lazy">
             </a>
             <a class="navbar-brand" href="#">
                 <img src="../static/images/account_circle-24px.svg" width="45" height="45" alt="" loading="lazy">

@@ -10,8 +10,8 @@
           crossorigin="anonymous">
 </head>
 <body>
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <a class="navbar-brand" href="#"></a>
+    <nav th:fragment="headnav" class="navbar navbar-expand-lg navbar-light bg-light">
+        <!--    <a class="navbar-brand" href="#" th:utext="${message}"></a>-->
         <button class="navbar-toggler" type="button" data-toggle="collapse"
                 data-target="#navbarSupportedContent"
                 aria-controls="navbarSupportedContent" aria-expanded="false"
@@ -21,18 +21,53 @@
 
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav mr-auto">
-                <li class="nav-item active"><a class="nav-link" th:href="@{/}">Home
-                    <span class="sr-only">(current)</span>
-                </a></li>
-                <li class="nav-item"><a class="nav-link" th:href="@{/employee}">Employee</a></li>
-                <li class="nav-item"><a class="nav-link"
-                                        th:href="@{/detail}">Create Employee</a></li>
+
+                <li>
+                    <nav class="navbar navbar-light bg-light">
+                        <a class="navbar-brand" href="#">
+                            <img src="../static/images/logo.png" width="45" height="45" alt="" loading="lazy">
+                        </a>
+                    </nav>
+                </li>
+                <li class="nav-item active">
+
+
+
+
+                    <!--                <a class="nav-link" th:href="@{/}">Home-->
+                    <!--                <span class="sr-only">(current)</span>-->
+                    <!--                </a>-->
+                </li>
+                <li class="nav-item">
+                    <!--                <a class="nav-link" th:href="@{/Accueil}">Employee</a>-->
+                    <div class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Accueil
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
+                            <button class="dropdown-item" type="button">Utilisateur</button>
+                            <button class="dropdown-item" type="button">Produis</button>
+                        </div>
+                    </div>
+                </li>
+                <li class="nav-item"><a class="nav-link" th:href="@{/Catalogue}">Catalogue</a></li>
+                <li class="nav-item"><a class="nav-link" th:href="@{/Contact}">Contact</a></li>
             </ul>
+
+            <a class="navbar-brand" href="#">
+                <img src="../static/images/shopping_cart-24px.svg" width="45" height="45" alt="" loading="lazy">
+            </a>
+            <a class="navbar-brand" href="#">
+                <img src="../static/images/account_circle-24px.svg" width="45" height="45" alt="" loading="lazy">
+            </a>
+            <a class="navbar-brand" href="#">
+                <img src="../static/images/power_settings_new-24px.svg" width="45" height="45" alt="" loading="lazy">
+            </a>
         </div>
     </nav>
 
     <table class="table table-hover"
-           th:if="${not #lists.isEmpty(listEmployee)}">
+           th:if="${not #lists.isEmpty(listProduits)}">
         <thead>
         <tr>
             <th scope="col">#</th>
@@ -43,10 +78,11 @@
             <th scope="col">Action</th>
         </tr>
         </thead>
-        <th:block th:each="produit : ${listProduis}">
+        <th:block th:each="produit : ${listProduits}">
             <tr>
 <!--                <td><a th:href="@{'/detail/' + ${produit.id}}"><span-->
 <!--                        th:text="${produit.id}"></span></a></td>-->
+                <td text = ...></td>
                 <td th:text="${produit.description}">...</td>
                 <td th:text="${produit.disponibilite}">...</td>
                 <td th:text="${produit.prix_unitaire}">...</td>
@@ -57,13 +93,13 @@
             </tr>
         </th:block>
     </table>
-    <span th:text="${totalPages}"></span>
+    <span th:text="${totalElements}"></span>
     <nav aria-label="Page navigation example">
         <ul class="pagination justify-content-center">
             <li class="page-item disabled"><a class="page-link" href="#"
                                               tabindex="-1">Previous</a></li>
             <th:block th:each="i : ${#numbers.sequence(0,totalElements/7)}">
-                <li class="page-item"><a class="page-link" th:href="@{'/employee?page=' + ${i}}"><span th:text=${i+1}></span></a></li>
+                <li class="page-item"><a class="page-link" th:href="@{'/Catalogue?page=' + ${i}}"><span th:text=${i+1}></span></a></li>
                 <!--  <li class="page-item"><a class="page-link" href="#">2</a></li>
                 <li class="page-item"><a class="page-link" href="#">3</a></li>  -->
             </th:block>

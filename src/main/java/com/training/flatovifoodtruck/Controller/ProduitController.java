@@ -4,12 +4,16 @@ import com.training.flatovifoodtruck.Entities.Produit;
 import com.training.flatovifoodtruck.Entities.Utilisateur;
 import com.training.flatovifoodtruck.Repository.ProduitRepository;
 import com.training.flatovifoodtruck.Repository.UtilisateurRepository;
+import javafx.scene.control.Pagination;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+
 
 import java.util.ArrayList;
 import java.util.List;
@@ -27,13 +31,23 @@ public class ProduitController {
         int elementsPerPage = 7;
         long totalElements =  this._produitRepo.count();
 
-        this.produits.clear();
-        //this.produits = this._produitRepo.findPage(page*elementsPerPage);
-
-        System.out.println("OKKKKK");
         System.out.println(totalElements);
-        this.produits = this._produitRepo.findAll();
+        System.out.println(page);
+        System.out.println(produits.size());
 
+        if (produits != null)
+        {
+            produits = new ArrayList<Produit>();
+        } else {
+            produits.clear();
+        }
+
+        System.out.println(page + " " + elementsPerPage + totalElements);
+        Pageable pageable = PageRequest.of(page, elementsPerPage);
+
+        this.produits = this._produitRepo.findAll(pageable).getContent();
+
+        System.out.println(produits);
         model.addAttribute("totalElements", totalElements);
         model.addAttribute("listProduits", this.produits);
         return "catalogue";

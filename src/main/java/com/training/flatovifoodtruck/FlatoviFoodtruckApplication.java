@@ -32,9 +32,5 @@ public class FlatoviFoodtruckApplication implements CommandLineRunner {
              ) {
             System.out.println(user.toString());
         }
-
-
     }
-
-
 }
